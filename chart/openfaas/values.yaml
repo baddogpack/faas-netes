@@ -109,9 +109,9 @@ gatewayPro:
 
 gateway:
   image: ghcr.io/openfaas/gateway:0.25.2
-  readTimeout: "65s"
-  writeTimeout: "65s"
-  upstreamTimeout: "60s"  # Must be smaller than read/write_timeout
+  readTimeout: "5m2s"
+  writeTimeout: "5m2s"
+  upstreamTimeout: "5m"  # Must be smaller than read/write_timeout
   replicas: 1
   scaleFromZero: true
   # change the port when creating multiple releases in the same baremetal cluster
@@ -165,6 +165,8 @@ faasnetes:
     requests:
       memory: "120Mi"
       cpu: "50m"
+  writeTimeout: 5m2s
+  readTimeout: 5m2s
 
 # replaces faas-netes with openfaas-operator
 operator:
@@ -214,7 +216,7 @@ queueWorker:
   # Control the concurrent invocations
   maxInflight: 1
   queueGroup: "faas"
-  ackWait: "60s"
+  ackWait: "5m"
   resources:
     requests:
       memory: "120Mi"

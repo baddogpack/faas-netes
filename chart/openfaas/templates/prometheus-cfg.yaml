@@ -39,6 +39,12 @@ data:
         static_configs:
           - targets: ['localhost:9090']
 
+      - job_name: 'cadvisor'
+        scrape_interval: 5s
+        static_configs:
+          - targets: 
+            - cadvisor:8080
+
       # Capture endpoints in the openfaas namespace with a scrape annotation
       # such as the gateway-provider service.
       - job_name: 'openfaas-endpoints'
